@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"*.pde": "java",
+		"system_error": "cpp",
+		"xlocale": "cpp"
+	}
+}
