@@ -9,11 +9,17 @@
 
 using namespace std;
 
+/** Empty constructor */
+Hero::Hero()
+{
+
+}
+
 /** Constructor with name as parameter */
 Hero::Hero(string name, int baseHealth, int maxHealth, int baseAttack, int maxAttack, int baseDefense,
-	int maxDefense, int baseSpecialAttack, int maxSpecialAttack, int startingMoney) :
-	Unit(name, baseHealth, maxHealth, baseAttack, maxAttack, baseDefense, maxDefense),
-	SpecialAttack(baseSpecialAttack, maxSpecialAttack)
+	int maxDefense, int baseSpecialAttack, int maxSpecialAttack, int maxSpecials, int startingMoney) : 
+	SpecialUnit(name, baseHealth, maxHealth, baseAttack, maxAttack, baseDefense, maxDefense, 
+		baseSpecialAttack, maxSpecialAttack, maxSpecials)
 {
 	money = startingMoney;
 }
@@ -22,4 +28,16 @@ Hero::Hero(string name, int baseHealth, int maxHealth, int baseAttack, int maxAt
 Hero::~Hero()
 {
 
+}
+
+/** Setter for the hero's money */
+void Hero::setMoney(int money)
+{
+	this->money = money;
+}
+
+/** Getter for the hero's money */
+int Hero::getMoney()
+{
+	return money;
 }

@@ -10,12 +10,14 @@
 
 #include "Unit.h"
 
-class Monster
+class Monster : public Unit
 {
 	public:
 		Monster();
+		Monster(std::string name, int baseHealth, int maxHealth, int baseAttack, int maxAttack,int baseDefense, int maxDefense);
 		~Monster();
 	private:
+		static int count;
 };
 
 #endif

@@ -8,15 +8,18 @@
 #ifndef BOSS_H
 #define BOSS_H
 
-#include "Unit.h"
-#include "SpecialAttack.h"
+#include "SpecialUnit.h"
 
-class Boss : public Unit, public SpecialAttack
+class Boss : public SpecialUnit
 {
 	public:
 		Boss();
+		Boss(std::string name, int baseHealth, int maxHealth, int baseAttack, int maxAttack, int baseDefense, int maxDefense,
+			int baseSpecialAttack, int maxSpecialAttack, int specials);
 		~Boss();
+		bool shouldItPerformSpecial();
 	private:
+		static int count;
 };
 
 #endif

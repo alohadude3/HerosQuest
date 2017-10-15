@@ -2,6 +2,8 @@
 	"files.associations": {
 		"*.pde": "java",
 		"system_error": "cpp",
-		"xlocale": "cpp"
+		"xlocale": "cpp",
+		"vector": "cpp",
+		"xstring": "cpp"
 	}
 }

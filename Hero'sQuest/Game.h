@@ -8,12 +8,29 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <string>
+#include <vector>
+#include "Hero.h"
+#include "Unit.h"
+
 class Game
 {
 	public:
 		Game();
 		~Game();
+		void init();
+		void play();
+		void fight(Unit* unit1, Unit* unit2);
+		void shop();
+		std::string getPlayerName();
+		bool askForSpecial();
+		void cleanup();
+		void wait();
+		void showBattleInformation(Unit* combatants[2], int turn);
+		void levelUpHero(Hero* hero);
 	private:
+		Hero* hero;
+		std::vector<Unit*> enemies;
 };
 
 #endif

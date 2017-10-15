@@ -9,14 +9,23 @@
 
 using namespace std;
 
+int Monster::count = 0;
+
 /** Empty constructor */
 Monster::Monster()
 {
+	count += 1;
+}
 
+/** Constructor with parameters */
+Monster::Monster(std::string name, int baseHealth, int maxHealth, int baseAttack, int maxAttack,int baseDefense, int maxDefense) :
+	Unit(name, baseHealth, maxHealth, baseAttack, maxAttack, baseDefense, maxDefense)
+{
+	count += 1;
 }
 
 /** Destructor */
 Monster::~Monster()
 {
-
+	count -= 1;
 }

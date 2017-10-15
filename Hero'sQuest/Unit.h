@@ -15,8 +15,25 @@ class Unit
 	public:
 		Unit();
 		Unit(std::string name, int baseHealth, int maxHealth, int baseAttack, int maxAttack,int baseDefense, int maxDefense);
-		~Unit();
+		virtual ~Unit();
+		int performAttack();
+		void defend(int attackValue);
+		void setName(std::string name);
+		std::string getName();
+		void setHealth(int health);
+		int getHealth();
+		void setMaxHealth(int maxHealth);
+		int getMaxHealth();
+		void setAttack(int attack);
+		int getAttack();
+		void setMaxAttack(int maxAttack);
+		int getMaxAttack();
+		void setDefense(int defense);
+		int getDefense();
+		void setMaxDefense(int maxDefense);
+		int getMaxDefense();
 	protected:
+		static int count;
 		std::string name;
 		int health;
 		int maxHealth;

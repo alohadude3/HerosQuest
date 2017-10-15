@@ -8,15 +8,17 @@
 #ifndef HERO_H
 #define HERO_H
 
-#include "Unit.h"
-#include "SpecialAttack.h"
+#include "SpecialUnit.h"
 
-class Hero : public Unit, public SpecialAttack
+class Hero : public SpecialUnit
 {
 	public:
-		Hero(std::string name, int baseHealth, int maxHealth, int baseAttack, int maxAttack,
-			int baseDefense, int maxDefense, int baseSpecialAttack, int maxSpecialAttack, int startingMoney);
+		Hero();
+		Hero(std::string name, int baseHealth, int maxHealth, int baseAttack, int maxAttack, int baseDefense, int maxDefense,
+			int baseSpecialAttack, int maxSpecialAttack, int maxSpecials, int startingMoney);
 		~Hero();
+		void setMoney(int money);
+		int getMoney();
 	private:
 		int money;
 };
