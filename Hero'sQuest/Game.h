@@ -28,6 +28,7 @@ class Game
 		void wait();
 		void showBattleInformation(Unit* combatants[2], int turn);
 		void levelUpHero(Hero* hero);
+		void resetSpecials(Unit* combatants[2]);
 	private:
 		Hero* hero;
 		std::vector<Unit*> enemies;

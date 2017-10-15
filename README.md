@@ -28,3 +28,4 @@ The game will require the user to press `enter` to continue showing the next act
 * Simple turn based combat system with an element of randomness simulating dice rolls
 * Special attacks are available to certain special units including the player and the boss
 * Boss will perform special attack at random, the more likely the lower its current health
+* A shop inbetween each battle to purchase buffs

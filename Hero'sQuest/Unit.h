@@ -33,7 +33,6 @@ class Unit
 		void setMaxDefense(int maxDefense);
 		int getMaxDefense();
 	protected:
-		static int count;
 		std::string name;
 		int health;
 		int maxHealth;
@@ -41,6 +40,8 @@ class Unit
 		int maxAttack;
 		int defense;
 		int maxDefense;
+	private:
+		static int count;
 };
 
 #endif

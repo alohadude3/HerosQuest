@@ -25,11 +25,12 @@ class SpecialUnit : public Unit
 		void setSpecials(int specials);
 		int getSpecials();
 	protected:
-		static int count;
 		int specialAttack;
 		int maxSpecialAttack;
 		int maxSpecials;
 		int specials;
+	private:
+		static int count;
 };
 
 #endif

@@ -8,6 +8,7 @@
 #ifndef HERO_H
 #define HERO_H
 
+#include <string>
 #include "SpecialUnit.h"
 
 class Hero : public SpecialUnit
@@ -19,6 +20,7 @@ class Hero : public SpecialUnit
 		~Hero();
 		void setMoney(int money);
 		int getMoney();
+		std::string showStats();
 	private:
 		int money;
 };

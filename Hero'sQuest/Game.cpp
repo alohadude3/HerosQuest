@@ -30,17 +30,18 @@ void Game::init()
 {
 	string name = getPlayerName();
 	hero = new Hero(name, 20, 50, 3, 10, 3, 10, 2, 10, 1, 0);
-	enemies.push_back(new Monster("Monster 1", 10, 100, 1, 10, 1, 10));
-	enemies.push_back(new Monster("Monster 2", 20, 100, 3, 10, 2, 10));
-	enemies.push_back(new Monster("Monster 3", 30, 100, 5, 10, 4, 10));
-	enemies.push_back(new Monster("Monster 4", 40, 100, 6, 10, 7, 10));
-	enemies.push_back(new Boss("Boss", 50, 100, 8, 10, 8, 10, 5, 10, 1));
+	enemies.push_back(new Monster("Monster 1", 10, 10, 1, 10, 1, 10));
+	enemies.push_back(new Monster("Monster 2", 20, 20, 3, 10, 2, 10));
+	enemies.push_back(new Monster("Monster 3", 30, 30, 5, 10, 4, 10));
+	enemies.push_back(new Monster("Monster 4", 40, 40, 6, 10, 7, 10));
+	enemies.push_back(new Boss("Boss", 50, 50, 8, 10, 8, 10, 5, 10, 1));
 }
 
 /** Play the game */
 void Game::play()
 {
-	while (hero->getHealth() > 0 && enemies.size() > 0)
+	bool ongoing = true;
+	while (ongoing)
 	{
 		fight(hero, enemies.at(0));
 		if (enemies.at(0)->getHealth() == 0)
@@ -48,7 +49,14 @@ void Game::play()
 			delete enemies.at(0);
 			enemies.erase(enemies.begin());
 		}
-		// shop();
+		if (hero->getHealth() > 0 && enemies.size() > 0)
+		{
+			shop();
+		}
+		else
+		{
+			ongoing = false;
+		}
 	}
 	cleanup();
 }
@@ -57,14 +65,6 @@ void Game::play()
 void Game::fight(Unit* unit1, Unit* unit2)
 {
 	Unit* combatants[2] = {unit1, unit2};
-	for (int i = 0; i < 2; i++)
-	{
-		SpecialUnit* temp = dynamic_cast<SpecialUnit*>(combatants[i]);
-		if (temp)
-		{
-			temp->setSpecials(1);
-		}
-	}
 	int turn = 0;
 	while (unit1->getHealth() > 0 && unit2->getHealth() > 0)
 	{
@@ -121,12 +121,114 @@ void Game::fight(Unit* unit1, Unit* unit2)
 		levelUpHero(static_cast<Hero*>(combatants[0]));
 		wait();
 	}
+	resetSpecials(combatants);
 }
 
 /** Shop inbetween fights */
 void Game::shop()
 {
-
+	bool shopping = true;
+	string noMoneyMessage = "You do not have enough money.\n";
+	while (shopping)
+	{
+		system("cls");
+		cout << "Welcome to the shop. How may we help you today?\n";
+		cout << "1. Recover 1hp. ($1)\n";
+		cout << "2. Attack up 1. ($30)\n";
+		cout << "3. Defense up 1. ($30)\n";
+		cout << "4. Special attack up 1. ($10)\n";
+		cout << "0. Exit shop and resume battle.\n\n";
+		cout << hero->showStats();
+		char response = _getch();
+		while (response != '0' && response != '1' && response != '2' && response != '3' && response != '4')
+		{
+			response = _getch();
+		}
+		switch (response)
+		{
+			case '0':
+			{
+				shopping = false;
+				break;
+			}
+			case '1':
+			{
+				if (hero->getHealth() == hero->getMaxHealth())
+				{
+					cout << "You are already at full hp.\n";
+				}
+				else if (hero->getMoney() < 10)
+				{
+					cout << noMoneyMessage;
+				}
+				else
+				{
+					cout << "You recover 1hp.\n";
+					hero->setHealth(hero->getHealth() + 1);
+					hero->setMoney(hero->getMoney() - 1);
+				}
+				wait();
+				break;
+			}
+			case '2':
+			{
+				if (hero->getAttack() == hero->getMaxAttack())
+				{
+					cout << "You cannot upgrade your attack further.\n";
+				}
+				else if (hero->getMoney() < 30)
+				{
+					cout << noMoneyMessage;
+				}
+				else
+				{
+					cout << "You increase your attack by 1.\n";
+					hero->setAttack(hero->getAttack() + 1);
+					hero->setMoney(hero->getMoney() - 30);
+				}
+				wait();
+				break;
+			}
+			case '3':
+			{
+				if (hero->getDefense() == hero->getMaxDefense())
+				{
+					cout << "You cannot upgrade your defense further.\n";
+				}
+				else if (hero->getMoney() < 30)
+				{
+					cout << noMoneyMessage;
+				}
+				else
+				{
+					cout << "You increase your defense by 1.\n";
+					hero->setDefense(hero->getDefense() + 1);
+					hero->setMoney(hero->getMoney() - 30);
+				}
+				wait();
+				break;
+			}
+			case '4':
+			{
+				if (hero->getSpecialAttack() == hero->getMaxSpecialAttack())
+				{
+					cout << "You cannot upgrade your special attack further.\n";
+				}
+				else if (hero->getMoney() < 10)
+				{
+					cout << noMoneyMessage;
+				}
+				else
+				{
+					cout << "You increase your special attack by 1.\n";
+					hero->setSpecialAttack(hero->getSpecialAttack() + 1);
+					hero->setMoney(hero->getMoney() - 10);
+				}
+				wait();
+				break;
+			}
+		}
+	}
 }
 
 /** Asks and returns the name of the player */
@@ -187,16 +289,11 @@ void Game::wait()
 /** Prints out the battle information */
 void Game::showBattleInformation(Unit* combatants[2], int turn)
 {
-	cout << combatants[0]->getName() << " (" << combatants[0]->getHealth() << "/" << combatants[0]->getMaxHealth() << ") vs " << combatants[1]->getName() << " (" << combatants[1]->getHealth() << "/" << combatants[1]->getMaxHealth() << ")\n";
+	cout << combatants[0]->getName() << " (" << combatants[0]->getHealth() << "/" << combatants[0]->getMaxHealth() << ") vs " << combatants[1]->getName() << " (" << combatants[1]->getHealth() << "/" << combatants[1]->getMaxHealth() << ")\n\n";
 	Hero* hero = dynamic_cast<Hero*>(combatants[0]);
 	if (hero)
 	{
-		cout << hero->getName() << "'s stats:\n";
-		cout << "Attack: (" << hero->getAttack() << "/" << hero->getMaxAttack() << ")\n";
-		cout << "Defense: (" << hero->getDefense() << "/" << hero->getMaxDefense() << ")\n";
-		cout << "Special: (" << hero->getSpecialAttack() << "/" << hero->getMaxSpecialAttack() << ")\n";
-		cout << "Specials available: " << hero->getSpecials() << "\n";
-		cout << "Money: $" << hero->getMoney() << "\n\n"; 
+		cout << hero->showStats();
 	}
 	cout << combatants[turn]->getName() << "'s turn\n\n";
 	wait();
@@ -218,4 +315,17 @@ void Game::levelUpHero(Hero* hero)
 	int specialGain = rand() % 3 + 0;
 	cout << hero->getName() << "'s special raises by " << specialGain << endl;
 	hero->setSpecialAttack(hero->getSpecialAttack() + specialGain);
+}
+
+/** Resets the special attacks of the combatants */
+void Game::resetSpecials(Unit* combatants[2])
+{
+	for (int i = 0; i < 2; i++)
+	{
+		SpecialUnit* temp = dynamic_cast<SpecialUnit*>(combatants[i]);
+		if (temp)
+		{
+			temp->setSpecials(1);
+		}
+	}
 }
