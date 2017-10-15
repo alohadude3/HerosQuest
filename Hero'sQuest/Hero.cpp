@@ -5,6 +5,7 @@
  * Date created: 16/09/2017
 */
 
+#include <sstream>
 #include "Hero.h"
 
 using namespace std;
@@ -40,4 +41,18 @@ void Hero::setMoney(int money)
 int Hero::getMoney()
 {
 	return money;
+}
+
+/** Returns a string of the hero's stats */
+string Hero::showStats()
+{
+	stringstream outputstream;
+	outputstream << name << "'s stats:\n";
+	outputstream << "HP: (" << health << "/" << maxHealth << ")\n";
+	outputstream << "Attack: (" << attack << "/" << maxAttack << ")\n";
+	outputstream << "Defense: (" << defense << "/" << maxDefense << ")\n";
+	outputstream << "Special Attack: (" << getSpecialAttack() << "/" << getMaxSpecialAttack() << ")\n";
+	outputstream << "Specials available: " << getSpecials() << "\n";
+	outputstream << "Money: $" << getMoney() << "\n\n";
+	return outputstream.str();
 }

@@ -39,6 +39,6 @@ Boss::~Boss()
 */
 bool Boss::shouldItPerformSpecial()
 {
-	int value = rand() % 100 + 10;
+	int value = rand() % maxHealth + maxHealth / 10;
 	return value >= health;
 }
