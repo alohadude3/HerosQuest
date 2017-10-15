@@ -5,11 +5,17 @@
  * Date created: 16/09/2017
 */
 
-#include <Game.h>
+#include <algorithm> //srand
+#include <time.h> //time
+#include "Game.h"
 
 using namespace std;
 
 int main()
 {
+	srand(time(NULL));
+	Game game = Game();
+	game.init();
+	game.play();
 	return 0;
 }

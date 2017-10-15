@@ -110,7 +110,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Hero%27sQuest\Hero%27sQuest\Boss.cpp" />
+    <ClCompile Include="..\..\Hero%27sQuest\Hero%27sQuest\Game.cpp" />
+    <ClCompile Include="..\..\Hero%27sQuest\Hero%27sQuest\Hero.cpp" />
+    <ClCompile Include="..\..\Hero%27sQuest\Hero%27sQuest\Monster.cpp" />
+    <ClCompile Include="..\..\Hero%27sQuest\Hero%27sQuest\SpecialUnit.cpp" />
+    <ClCompile Include="..\..\Hero%27sQuest\Hero%27sQuest\Unit.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Hero%27sQuest\Hero%27sQuest\Boss.h" />
+    <ClInclude Include="..\..\Hero%27sQuest\Hero%27sQuest\Game.h" />
+    <ClInclude Include="..\..\Hero%27sQuest\Hero%27sQuest\Hero.h" />
+    <ClInclude Include="..\..\Hero%27sQuest\Hero%27sQuest\Monster.h" />
+    <ClInclude Include="..\..\Hero%27sQuest\Hero%27sQuest\SpecialUnit.h" />
+    <ClInclude Include="..\..\Hero%27sQuest\Hero%27sQuest\Unit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
