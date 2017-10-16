@@ -14,8 +14,12 @@ using namespace std;
 int main()
 {
 	srand(time(NULL));
-	Game game = Game();
-	game.init();
-	game.play();
+	bool playing = true;
+	while (playing)
+	{
+		Game game = Game();
+		game.init();
+		playing = game.play();
+	}
 	return 0;
 }
