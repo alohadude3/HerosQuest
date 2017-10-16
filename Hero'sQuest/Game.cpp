@@ -28,6 +28,7 @@ Game::~Game()
 /** Initialises the game */
 void Game::init()
 {
+	system("cls");
 	string name = getPlayerName();
 	hero = new Hero(name, 20, 50, 3, 10, 3, 10, 2, 10, 1, 0);
 	enemies.push_back(new Monster("Monster 1", 10, 10, 1, 10, 1, 10));
@@ -38,7 +39,7 @@ void Game::init()
 }
 
 /** Play the game */
-void Game::play()
+bool Game::play()
 {
 	bool ongoing = true;
 	while (ongoing)
@@ -58,7 +59,17 @@ void Game::play()
 			ongoing = false;
 		}
 	}
+	system("cls");
+	if (hero->getHealth() > 0)
+	{
+		cout << "You have emerged victorious.\n";
+	}
+	else
+	{
+		cout << "You have fallen to the monsters.\n";
+	}
 	cleanup();
+	return getTryAgain();
 }
 
 /** Start a fight */
@@ -328,4 +339,20 @@ void Game::resetSpecials(Unit* combatants[2])
 			temp->setSpecials(1);
 		}
 	}
+}
+
+/**
+ * Asks the player if they want to play the game again
+ * Returns true if the player inputs 'y'
+ * Returns false if the player inputs 'n'
+*/
+bool Game::getTryAgain()
+{
+	cout << "Would you like to play again? (y/n)\n";
+	char response = _getch();
+	while (response != 'y' && response != 'n')
+	{
+		response = _getch();
+	}
+	return response == 'y';
 }

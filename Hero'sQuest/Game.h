@@ -19,7 +19,7 @@ class Game
 		Game();
 		~Game();
 		void init();
-		void play();
+		bool play();
 		void fight(Unit* unit1, Unit* unit2);
 		void shop();
 		std::string getPlayerName();
@@ -29,6 +29,7 @@ class Game
 		void showBattleInformation(Unit* combatants[2], int turn);
 		void levelUpHero(Hero* hero);
 		void resetSpecials(Unit* combatants[2]);
+		bool getTryAgain();
 	private:
 		Hero* hero;
 		std::vector<Unit*> enemies;
