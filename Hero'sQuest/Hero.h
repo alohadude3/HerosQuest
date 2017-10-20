@@ -22,6 +22,7 @@ class Hero : public SpecialUnit
 		int getMoney();
 		std::string showStats();
 	private:
+		static int count;
 		int money;
 };
 
