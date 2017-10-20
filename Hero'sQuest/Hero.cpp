@@ -10,10 +10,12 @@
 
 using namespace std;
 
+int Hero::count = 0;
+
 /** Empty constructor */
 Hero::Hero()
 {
-
+	count += 1;
 }
 
 /** Constructor with name as parameter */
@@ -23,12 +25,13 @@ Hero::Hero(string name, int baseHealth, int maxHealth, int baseAttack, int maxAt
 		baseSpecialAttack, maxSpecialAttack, maxSpecials)
 {
 	money = startingMoney;
+	count += 1;
 }
 
 /** Destructor */
 Hero::~Hero()
 {
-
+	count -= 1;
 }
 
 /** Setter for the hero's money */
